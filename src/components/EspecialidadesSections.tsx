@@ -1,39 +1,46 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import Image from 'next/image';
 import Link from 'next/link';
+import {
+  Stethoscope,
+  LayoutDashboard,
+  Camera,
+  TrendingUp,
+  MousePointerClick,
+  Globe,
+} from 'lucide-react';
 
 const especialidades = [
   {
     titulo: 'Marketing Médico',
     descricao: 'Autoridade e crescimento orgânico para profissionais e clínicas de saúde.',
-    icone: '/icons/medico.svg',
+    icone: Stethoscope,
   },
   {
     titulo: 'Gestão de Redes Sociais',
     descricao: 'Criação de conteúdo estratégico, cronogramas, relatórios e copy de impacto.',
-    icone: '/icons/social.svg',
+    icone: LayoutDashboard,
   },
   {
     titulo: 'Captação Profissional de Conteúdo',
     descricao: 'Vídeos, fotos e bastidores que elevam a percepção da sua marca.',
-    icone: '/icons/camera.svg',
+    icone: Camera,
   },
   {
     titulo: 'Growth e Posicionamento',
     descricao: 'Estrategicamente estruturado para atrair, engajar e converter.',
-    icone: '/icons/growth.svg',
+    icone: TrendingUp,
   },
   {
     titulo: 'Tráfego Pago',
     descricao: 'Campanhas otimizadas no Meta Ads e Google para gerar leads reais.',
-    icone: '/icons/ads.svg',
+    icone: MousePointerClick,
   },
   {
     titulo: 'Criação de Sites',
     descricao: 'Sites e landing pages com foco em experiência, conversão e SEO.',
-    icone: '/icons/website.svg',
+    icone: Globe,
   },
 ];
 
@@ -52,34 +59,29 @@ export default function EspecialidadesSection() {
           Nossas Especialidades
         </h2>
 
-        {/* Cards de especialidades */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10">
-          {especialidades.map((item, index) => (
-            <motion.article
-              key={index}
-              className="bg-gray-100 p-6 rounded-xl shadow-md hover:shadow-lg transition duration-300 text-left focus-within:ring-2 focus-within:ring-violet-500"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.1, duration: 0.5 }}
-              tabIndex={0}
-            >
-              <div className="mb-4" aria-hidden="true">
-                <Image
-                  src={item.icone}
-                  alt=""
-                  width={40}
-                  height={40}
-                  loading="lazy"
-                />
-              </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">{item.titulo}</h3>
-              <p className="text-gray-600">{item.descricao}</p>
-            </motion.article>
-          ))}
+          {especialidades.map((item, index) => {
+            const Icon = item.icone;
+            return (
+              <motion.article
+                key={index}
+                className="bg-gray-100 p-6 rounded-xl shadow-md hover:shadow-lg transition duration-300 text-left focus-within:ring-2 focus-within:ring-violet-500"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1, duration: 0.5 }}
+                tabIndex={0}
+              >
+                <div className="mb-4 flex items-center justify-center w-12 h-12 rounded-full bg-violet-100 text-violet-600">
+                  <Icon size={24} />
+                </div>
+                <h3 className="text-xl font-semibold text-gray-900 mb-2">{item.titulo}</h3>
+                <p className="text-gray-600">{item.descricao}</p>
+              </motion.article>
+            );
+          })}
         </div>
 
-        {/* CTA com foco e contraste acessível */}
         <motion.div
           className="mt-16"
           initial={{ opacity: 0, y: 30 }}
