@@ -2,6 +2,7 @@
 
 import { motion, circOut } from 'framer-motion';
 import Link from 'next/link';
+import Image from 'next/image';
 
 // Animações
 const container = {
@@ -27,7 +28,7 @@ export default function InicioSection() {
   return (
     <section
       id="inicio"
-      className="relative pt-32 px-6 min-h-screen text-white flex flex-col items-center justify-center text-center overflow-hidden"
+      className="relative pt-10 px-6 min-h-screen text-white flex flex-col items-center justify-center text-center overflow-hidden"
     >
       {/* 🔴 Vídeo de fundo */}
       <video
@@ -37,6 +38,7 @@ export default function InicioSection() {
         loop
         muted
         playsInline
+        preload="auto"
       />
 
       {/* 🔴 Overlay escurecedor sutil */}
@@ -51,12 +53,16 @@ export default function InicioSection() {
         className="flex flex-col items-center z-20"
       >
         {/* Logo com brilho */}
-        <motion.img
-          src="/logo2.webp"
-          alt="Logo Vibe"
-          className="w-28 md:w-36 mb-8 drop-shadow-[0_0_30px_rgba(255,0,180,0.35)]"
-          variants={fadeUp}
-        />
+        <motion.div variants={fadeUp}>
+          <Image
+            src="/logo2.webp"
+            alt="Logo da Agência Vibe"
+            width={144}
+            height={144}
+            priority
+            className="mb-8 drop-shadow-[0_0_30px_rgba(255,0,180,0.35)]"
+          />
+        </motion.div>
 
         {/* Título com gradiente parcial */}
         <motion.h1
@@ -84,8 +90,12 @@ export default function InicioSection() {
         {/* Botão CTA */}
         <motion.div className="mt-10" variants={fadeUp}>
           <Link href="#contato">
-            <button className="group relative inline-flex items-center px-8 py-3 text-base font-semibold rounded-full border-2 border-violet-500 text-white overflow-hidden transition-all duration-300 hover:bg-violet-500">
-              <span className="relative z-10">Quero um site de impacto</span>
+            <button
+              aria-label="Conversar com a Agência Vibe"
+              role="button"
+              className="group relative inline-flex items-center px-8 py-3 text-base font-semibold rounded-full border-2 border-violet-500 text-white overflow-hidden transition-all duration-300 hover:bg-violet-500"
+            >
+              <span className="relative z-10">Quero Transformar o Digital da Minha Empresa</span>
               <span className="absolute inset-0 scale-0 group-hover:scale-100 bg-violet-500 z-0 transition-transform duration-300 rounded-full"></span>
             </button>
           </Link>
