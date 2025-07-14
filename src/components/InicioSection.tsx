@@ -12,7 +12,7 @@ const container = {
 };
 
 const fadeUp = {
-  hidden: { opacity: 0, y: 80 },
+  hidden: { opacity: 0, y: 100 },
   visible: {
     opacity: 1,
     y: 0,

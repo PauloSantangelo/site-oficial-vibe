@@ -5,14 +5,16 @@
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 
-  --color-background: #ffffff;
-  --color-foreground: #171717;
+  /* Fundo preto padrão para o modo claro */
+  --color-background: #000000; 
+  --color-foreground: #ededed; /* Cor do texto para contraste no fundo preto */
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --color-background: #0a0a0a;
-    --color-foreground: #ededed;
+    /* Fundo preto também para o modo escuro */
+    --color-background: #000000; 
+    --color-foreground: #ededed; /* Cor do texto para contraste no fundo preto */
   }
 }
 
