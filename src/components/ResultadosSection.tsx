@@ -6,49 +6,52 @@ import { DM_Serif_Display, Manrope } from "next/font/google";
 
 /* ---------------------- Fontes ---------------------- */
 const display = DM_Serif_Display({ subsets: ["latin"], weight: "400" });
-const sans = Manrope({ subsets: ["latin"], weight: ["300","400","600","700"] });
+const sans = Manrope({ subsets: ["latin"], weight: ["300", "400", "600", "700"] });
 
 /* ---------------------- Dados ---------------------- */
 const depoimentos = [
   {
-    texto: "Com a Vibe, conseguimos escalar nosso negócio online e dobrar o faturamento em menos de 6 meses.",
+    texto:
+      "Com a Vibe, conseguimos escalar nosso negócio online e dobrar o faturamento em menos de 6 meses.",
     autor: "Mariana Lopes • Loja de Cosméticos",
   },
   {
-    texto: "A gestão de tráfego foi decisiva para conquistar novos clientes com previsibilidade e consistência.",
+    texto:
+      "A gestão de tráfego foi decisiva para conquistar novos clientes com previsibilidade e consistência.",
     autor: "Carlos Pereira • Coach Digital",
   },
   {
-    texto: "Ficamos impressionados com o posicionamento no Google e a identidade visual criada para nossa marca.",
+    texto:
+      "Ficamos impressionados com o posicionamento no Google e a identidade visual criada para nossa marca.",
     autor: "Luciana Braga • Clínica de Estética",
   },
   {
-    texto: "As estratégias de conteúdo foram certeiras. Crescemos organicamente e ganhamos autoridade real nas redes.",
+    texto:
+      "As estratégias de conteúdo foram certeiras. Crescemos organicamente e ganhamos autoridade real nas redes.",
     autor: "Dra. Fabiana • Ginecologista",
   },
 ] as const;
 
 export default function ResultadosSection() {
   const [index, setIndex] = useState(0);
-  const timerRef = useRef<NodeJS.Timeout | null>(null);
+  const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const isHovering = useRef(false);
 
   useEffect(() => {
-    start();
-    return stop;
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  const start = () => {
-    if (timerRef.current) clearInterval(timerRef.current);
-    timerRef.current = setInterval(() => {
-      if (!isHovering.current) setIndex((i) => (i + 1) % depoimentos.length);
+    // inicia o carrossel
+    const id = setInterval(() => {
+      if (!isHovering.current) {
+        setIndex((i) => (i + 1) % depoimentos.length);
+      }
     }, 6000);
-  };
-  const stop = () => {
-    if (timerRef.current) clearInterval(timerRef.current);
-    timerRef.current = null;
-  };
+    timerRef.current = id;
+
+    // cleanup
+    return () => {
+      clearInterval(id);
+      timerRef.current = null;
+    };
+  }, []);
 
   return (
     <section
@@ -101,7 +104,7 @@ export default function ResultadosSection() {
                 style={{ background: "linear-gradient(90deg,#E9D8A6,#C8B273)" }}
               />
 
-              <div className="mb-4 text-5xl leading-none text-[#9C8551]">“</div>
+              <div className="mb-4 text-5xl leading-none text-[#9C8551]">&ldquo;</div>
               <blockquote className="text-lg leading-relaxed text-slate-800">
                 {depoimentos[index].texto}
               </blockquote>
@@ -122,7 +125,7 @@ export default function ResultadosSection() {
                 i === index ? "bg-[#9C8551] scale-110" : "bg-neutral-300 hover:bg-neutral-400"
               }`}
               aria-label={`Ver depoimento ${i + 1}`}
-              aria-current={i === index}
+              aria-current={i === index ? "true" : undefined}
             />
           ))}
         </div>

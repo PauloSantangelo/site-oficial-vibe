@@ -30,7 +30,7 @@ export default function SobreSabrinaSection() {
           transition={{ duration: 0.6, ease: easeInOut }}
           className={`${display.className} text-center text-3xl sm:text-4xl leading-tight mb-14`}
         >
-          Sobre {" "}
+          Sobre{" "}
           <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#9C8551] via-[#C7B079] to-[#AD9A63]">
             Sabrina Santangelo
           </span>
@@ -79,9 +79,12 @@ export default function SobreSabrinaSection() {
             transition={{ duration: 0.6, ease: easeInOut }}
             className="md:pl-6"
           >
-            <h3 className={`${display.className} text-2xl sm:text-3xl leading-snug mb-4`}>Fundadora da Vibe desde 2020</h3>
+            <h3 className={`${display.className} text-2xl sm:text-3xl leading-snug mb-4`}>
+              Fundadora da Vibe desde 2020
+            </h3>
             <p className="text-slate-700 text-base sm:text-lg leading-relaxed">
-              Estrategista criativa que une direção de arte, conteúdo e performance para marcas que buscam sofisticação com resultado. Constrói presença digital com método e consistência.
+              Estrategista criativa que une direção de arte, conteúdo e performance para marcas que
+              buscam sofisticação com resultado. Constrói presença digital com método e consistência.
             </p>
             <ul className="mt-6 space-y-2 text-slate-700 text-sm sm:text-base">
               <li>• Pós-graduação em Marketing & Growth</li>
@@ -106,10 +109,16 @@ export default function SobreSabrinaSection() {
           transition={{ duration: 0.6, ease: easeInOut }}
           className="relative mx-auto mt-16 max-w-4xl"
         >
-          <blockquote className={`relative rounded-3xl border border-neutral-200 bg-white p-6 sm:p-8 text-center shadow-md` }>
-            <div className="absolute -inset-[1px] rounded-3xl bg-gradient-to-r from-[#C7B079] via-[#EADDB3] to-[#AD9A63] opacity-25 blur-md" aria-hidden />
-            <span className={`${display.className} relative block text-lg sm:text-2xl leading-relaxed text-slate-900`}>
-              "Transformamos presença digital em estratégia. Não é sobre estar online, é sobre marcar presença."
+          <blockquote className="relative rounded-3xl border border-neutral-200 bg-white p-6 sm:p-8 text-center shadow-md">
+            <div
+              className="absolute -inset-[1px] rounded-3xl bg-gradient-to-r from-[#C7B079] via-[#EADDB3] to-[#AD9A63] opacity-25 blur-md"
+              aria-hidden
+            />
+            <span
+              className={`${display.className} relative block text-lg sm:text-2xl leading-relaxed text-slate-900`}
+            >
+              &ldquo;Transformamos presença digital em estratégia. Não é sobre estar online, é sobre
+              marcar presença.&rdquo;
             </span>
           </blockquote>
         </motion.figure>

@@ -1,5 +1,6 @@
 "use client";
 
+import type React from "react";
 import { useEffect, useState } from "react";
 import { motion, Variants, easeInOut } from "framer-motion";
 import Link from "next/link";
@@ -84,14 +85,18 @@ const todosOsServicos: ServicoCompleto[] = [
 /* ---------------------- Util: Scrollspy leve para TOC ---------------------- */
 function useSectionSpy(ids: string[]) {
   const [active, setActive] = useState<string>(ids[0] ?? "");
+
   useEffect(() => {
     const onScroll = () => {
-      let current = active;
+      let current = ids[0] ?? "";
       for (const id of ids) {
         const el = document.getElementById(id);
         if (!el) continue;
         const rect = el.getBoundingClientRect();
-        if (rect.top <= window.innerHeight * 0.35 && rect.bottom >= window.innerHeight * 0.35) {
+        if (
+          rect.top <= window.innerHeight * 0.35 &&
+          rect.bottom >= window.innerHeight * 0.35
+        ) {
           current = id;
           break;
         }
@@ -102,6 +107,7 @@ function useSectionSpy(ids: string[]) {
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, [ids]);
+
   return active;
 }
 
@@ -109,7 +115,7 @@ export default function ServicosPage() {
   const ids = todosOsServicos.map((s) => s.id);
   const active = useSectionSpy(ids);
 
-  const smoothTo = (e: React.MouseEvent, id: string) => {
+  const smoothTo = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
     e.preventDefault();
     const el = document.getElementById(id);
     if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -117,10 +123,18 @@ export default function ServicosPage() {
   };
 
   return (
-    <div className={`${sans.className} relative min-h-screen bg-[#0E1013] text-white pt-32 pb-24 overflow-hidden`}>
+    <div
+      className={`${sans.className} relative min-h-screen bg-[#0E1013] text-white pt-32 pb-24 overflow-hidden`}
+    >
       {/* Fundo elegante */}
-      <div aria-hidden className="absolute inset-0 -z-10 bg-[radial-gradient(120%_90%_at_50%_5%,#1B1E25_0%,#0E1013_60%,#0B0D10_100%)]" />
-      <div aria-hidden className="absolute inset-0 -z-10 opacity-[0.06] [background-image:linear-gradient(to_right,rgba(255,255,255,.4)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,.4)_1px,transparent_1px)] [background-size:48px_48px]" />
+      <div
+        aria-hidden
+        className="absolute inset-0 -z-10 bg-[radial-gradient(120%_90%_at_50%_5%,#1B1E25_0%,#0E1013_60%,#0B0D10_100%)]"
+      />
+      <div
+        aria-hidden
+        className="absolute inset-0 -z-10 opacity-[0.06] [background-image:linear-gradient(to_right,rgba(255,255,255,.4)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,.4)_1px,transparent_1px)] [background-size:48px_48px]"
+      />
 
       <div className="mx-auto max-w-7xl px-6">
         {/* Header da página */}
@@ -130,7 +144,9 @@ export default function ServicosPage() {
           transition={{ duration: 0.6, ease: easeInOut }}
           className="text-center mb-12"
         >
-          <h1 className={`${display.className} text-4xl md:text-6xl leading-tight`}>Nossos Serviços Completos</h1>
+          <h1 className={`${display.className} text-4xl md:text-6xl leading-tight`}>
+            Nossos Serviços Completos
+          </h1>
           <p className="mx-auto mt-4 max-w-2xl text-white/80">
             Soluções integradas para elevar sua marca com estética, estratégia e performance.
           </p>
@@ -145,9 +161,7 @@ export default function ServicosPage() {
                 href={`#${s.id}`}
                 onClick={(e) => smoothTo(e, s.id)}
                 className={`inline-flex items-center rounded-full px-4 py-2 transition ${
-                  active === s.id
-                    ? "bg-white text-slate-900"
-                    : "text-white/85 hover:bg-white/10"
+                  active === s.id ? "bg-white text-slate-900" : "text-white/85 hover:bg-white/10"
                 }`}
               >
                 {s.titulo}
@@ -171,7 +185,10 @@ export default function ServicosPage() {
             viewport={{ once: true, amount: 0.35 }}
           >
             <div className="md:px-6">
-              <h2 id={`${servico.id}-title`} className={`${display.className} text-3xl md:text-4xl text-white`}>
+              <h2
+                id={`${servico.id}-title`}
+                className={`${display.className} text-3xl md:text-4xl text-white`}
+              >
                 {servico.titulo}
               </h2>
               <h3 className="mt-2 text-base md:text-lg text-white/80">{servico.subtitulo}</h3>
@@ -182,7 +199,7 @@ export default function ServicosPage() {
                   <span className="absolute -inset-[2px] rounded-full bg-gradient-to-r from-[#E9D8A6] via-[#F1E4BD] to-[#C8B273] opacity-70 blur-md transition group-hover:opacity-100" />
                   <span
                     className="relative inline-flex items-center justify-center rounded-full px-7 py-3 text-base font-semibold text-slate-900"
-                    style={{ background: "linear-gradient(180deg,#F5EFD8,#E9D8A6_45%,#C8B273)" }}
+                    style={{ background: "linear-gradient(180deg,#F5EFD8,#E9D8A6 45%,#C8B273)" }}
                   >
                     {servico.cta}
                   </span>
@@ -203,7 +220,11 @@ export default function ServicosPage() {
                 {servico.titulo}
               </figcaption>
               {/* halo sutil */}
-              <span aria-hidden className="pointer-events-none absolute -inset-[1px] rounded-2xl opacity-20 blur-md" style={{ background: "linear-gradient(90deg,#E9D8A6,#C8B273)" }} />
+              <span
+                aria-hidden
+                className="pointer-events-none absolute -inset-[1px] rounded-2xl opacity-20 blur-md"
+                style={{ background: "linear-gradient(90deg,#E9D8A6,#C8B273)" }}
+              />
             </figure>
           </motion.section>
         ))}
@@ -216,19 +237,26 @@ export default function ServicosPage() {
           transition={{ duration: 0.6, ease: easeInOut }}
           className="mt-24 text-center"
         >
-          <h2 className={`${display.className} text-3xl md:text-4xl`}>Pronto para elevar sua marca?</h2>
-          <p className="mx-auto mt-3 max-w-xl text-white/80">Converse com a Vibe e desenhe um plano sob medida para o seu momento.</p>
+          <h2 className={`${display.className} text-3xl md:text-4xl`}>
+            Pronto para elevar sua marca?
+          </h2>
+          <p className="mx-auto mt-3 max-w-xl text-white/80">
+            Converse com a Vibe e desenhe um plano sob medida para o seu momento.
+          </p>
           <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
             <Link href="/contato" className="group relative inline-flex items-center">
               <span className="absolute -inset-[2px] rounded-full bg-gradient-to-r from-[#E9D8A6] via-[#F1E4BD] to-[#C8B273] opacity-70 blur-md transition group-hover:opacity-100" />
               <span
                 className="relative inline-flex items-center justify-center rounded-full px-8 py-3 text-base font-semibold text-slate-900"
-                style={{ background: "linear-gradient(180deg,#F5EFD8,#E9D8A6_45%,#C8B273)" }}
+                style={{ background: "linear-gradient(180deg,#F5EFD8,#E9D8A6 45%,#C8B273)" }}
               >
                 Converse conosco agora
               </span>
             </Link>
-            <Link href="/" className="inline-flex items-center justify-center rounded-full border border-white/20 bg-white/5 px-8 py-3 text-base font-semibold text-white transition hover:bg-white/10">
+            <Link
+              href="/"
+              className="inline-flex items-center justify-center rounded-full border border-white/20 bg-white/5 px-8 py-3 text-base font-semibold text-white transition hover:bg-white/10"
+            >
               Voltar à página inicial
             </Link>
           </div>
