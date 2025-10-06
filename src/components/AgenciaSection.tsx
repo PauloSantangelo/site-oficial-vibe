@@ -1,107 +1,118 @@
-'use client';
+"use client";
 
-import Image from 'next/image';
-import { motion } from 'framer-motion';
+import Image from "next/image";
+import { motion, easeInOut } from "framer-motion";
+import { DM_Serif_Display, Manrope } from "next/font/google";
 
-export default function AgenciaSection() {
+/* ---------------------- Fontes elegantes ---------------------- */
+const display = DM_Serif_Display({ subsets: ["latin"], weight: "400" });
+const sans = Manrope({ subsets: ["latin"], weight: ["300", "400", "600", "700"] });
+
+export default function SobreSabrinaSection() {
   return (
     <section
       id="agencia"
-      className="w-full bg-[#0d0d23] text-white pt-24 pb-32 px-4 sm:px-6"
       aria-labelledby="agencia-heading"
+      className={`${sans.className} relative w-full bg-neutral-50 text-slate-900 px-4 sm:px-6 pt-24 pb-28 overflow-hidden`}
     >
-      <div className="max-w-6xl mx-auto">
-        <h2
+      {/* Ornamento clarinho */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 opacity-[0.05] [background-image:linear-gradient(to_right,rgba(0,0,0,.15)_1px,transparent_1px),linear-gradient(to_bottom,rgba(0,0,0,.15)_1px,transparent_1px)] [background-size:48px_48px]"
+      />
+
+      <div className="mx-auto max-w-6xl">
+        <motion.h2
           id="agencia-heading"
-          className="text-3xl sm:text-4xl font-bold text-center mb-20 text-pink-400"
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.4 }}
+          transition={{ duration: 0.6, ease: easeInOut }}
+          className={`${display.className} text-center text-3xl sm:text-4xl leading-tight mb-14`}
         >
-          A trajetória por trás da Agência Vibe
-        </h2>
+          Sobre {" "}
+          <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#9C8551] via-[#C7B079] to-[#AD9A63]">
+            Sabrina Santangelo
+          </span>
+        </motion.h2>
 
-        {/* BLOCO 1 */}
-        <motion.div
-          className="flex flex-col md:flex-row items-center gap-10 mb-24"
-          initial={{ opacity: 0, y: 50 }}
+        <div className="grid items-center gap-10 md:grid-cols-2">
+          {/* Duas fotos sobrepostas */}
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.35 }}
+            transition={{ duration: 0.6, ease: easeInOut }}
+            className="relative w-full"
+          >
+            {/* Foto 1 (maior) */}
+            <figure className="relative aspect-[4/5] w-full overflow-hidden rounded-3xl bg-white shadow-xl ring-1 ring-neutral-200">
+              <Image
+                src="/sabrina8.jpg"
+                alt="Retrato de Sabrina"
+                fill
+                sizes="(max-width: 768px) 100vw, 50vw"
+                priority
+                className="object-cover"
+              />
+            </figure>
+
+            {/* Foto 2 (sobreposta) */}
+            <figure className="absolute -right-6 bottom-[-10%] hidden w-[62%] translate-y-0 rounded-3xl bg-white shadow-xl ring-1 ring-neutral-200 md:block">
+              <div className="relative aspect-[4/5] w-full overflow-hidden rounded-3xl">
+                <Image
+                  src="/sabrina11.jpg"
+                  alt="Sabrina em sessão de trabalho"
+                  fill
+                  sizes="(max-width: 768px) 50vw, 35vw"
+                  className="object-cover"
+                />
+              </div>
+            </figure>
+          </motion.div>
+
+          {/* Texto resumido */}
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.35 }}
+            transition={{ duration: 0.6, ease: easeInOut }}
+            className="md:pl-6"
+          >
+            <h3 className={`${display.className} text-2xl sm:text-3xl leading-snug mb-4`}>Fundadora da Vibe desde 2020</h3>
+            <p className="text-slate-700 text-base sm:text-lg leading-relaxed">
+              Estrategista criativa que une direção de arte, conteúdo e performance para marcas que buscam sofisticação com resultado. Constrói presença digital com método e consistência.
+            </p>
+            <ul className="mt-6 space-y-2 text-slate-700 text-sm sm:text-base">
+              <li>• Pós-graduação em Marketing & Growth</li>
+              <li>• MBA em Marketing Estratégico Digital</li>
+              <li>• Experiência com dezenas de marcas e segmentos</li>
+              <li>• Mentorias de posicionamento e tráfego</li>
+            </ul>
+
+            {/* Faixa de credibilidade */}
+            <div className="mt-6 inline-flex items-center gap-2 rounded-full border border-neutral-200 bg-white px-5 py-2 text-sm text-slate-700 shadow-sm">
+              <span className="h-2 w-2 rounded-full bg-gradient-to-r from-[#C7B079] to-[#9C8551]" />
+              Desde 2020 refinando marcas com estética e estratégia
+            </div>
+          </motion.div>
+        </div>
+
+        {/* Frase de destaque (claro) */}
+        <motion.figure
+          initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 0.6, ease: easeInOut }}
+          className="relative mx-auto mt-16 max-w-4xl"
         >
-          <div className="md:w-1/2 w-full">
-            <h3 className="text-2xl font-bold mb-4">Um notebook, um celular e um sonho</h3>
-            <p className="text-base sm:text-lg text-gray-300 leading-relaxed">
-              Sabrina começou sua jornada atendendo empresas do varejo com poucos recursos,
-              mas com muita determinação. Sozinha, foi criando conteúdo, testando estratégias
-              e conquistando seus primeiros resultados.
-            </p>
-          </div>
-
-          <div className="md:w-1/2 w-full relative aspect-video rounded-2xl overflow-hidden shadow-lg">
-            <Image
-              src="/sabrina-inicio.jpg"
-              alt="Foto da Sabrina no início da carreira, usando notebook e celular"
-              fill
-              sizes="(max-width: 768px) 100vw, 50vw"
-              className="object-cover"
-              priority
-            />
-          </div>
-        </motion.div>
-
-        {/* BLOCO 2 */}
-        <motion.div
-          className="flex flex-col md:flex-row-reverse items-center gap-10 mb-24"
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-        >
-          <div className="md:w-1/2 w-full">
-            <h3 className="text-2xl font-bold mb-4">Especialização e crescimento orgânico</h3>
-            <p className="text-base sm:text-lg text-gray-300 leading-relaxed">
-              Com estudo e prática, Sabrina se tornou especialista em Marketing e Growth.
-              Começou a crescer com perfis que alcançaram milhões de visualizações em Reels,
-              gerando seguidores reais e autoridade para seus clientes.
-            </p>
-          </div>
-
-          <div className="md:w-1/2 w-full relative aspect-video rounded-2xl overflow-hidden shadow-lg">
-            <Image
-              src="/sabrina-transicao.jpg"
-              alt="Sabrina trabalhando com estratégias de marketing"
-              fill
-              sizes="(max-width: 768px) 100vw, 50vw"
-              className="object-cover"
-            />
-          </div>
-        </motion.div>
-
-        {/* BLOCO 3 */}
-        <motion.div
-          className="flex flex-col md:flex-row items-center gap-10"
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-        >
-          <div className="md:w-1/2 w-full">
-            <h3 className="text-2xl font-bold mb-4">Mais de 25 empresas atendidas com autoridade</h3>
-            <p className="text-base sm:text-lg text-gray-300 leading-relaxed">
-              Hoje, a Agência Vibe entrega um serviço completo – da captação profissional de conteúdo à estratégia de
-              posicionamento. A maioria dos clientes está no nicho médico, e os resultados são reais: mais autoridade, mais
-              seguidores e mais conversão.
-            </p>
-          </div>
-
-          <div className="md:w-1/2 w-full relative aspect-video rounded-2xl overflow-hidden shadow-lg">
-            <Image
-              src="/sabrina-hoje.jpg"
-              alt="Sabrina liderando a Agência Vibe atualmente"
-              fill
-              sizes="(max-width: 768px) 100vw, 50vw"
-              className="object-cover"
-            />
-          </div>
-        </motion.div>
+          <blockquote className={`relative rounded-3xl border border-neutral-200 bg-white p-6 sm:p-8 text-center shadow-md` }>
+            <div className="absolute -inset-[1px] rounded-3xl bg-gradient-to-r from-[#C7B079] via-[#EADDB3] to-[#AD9A63] opacity-25 blur-md" aria-hidden />
+            <span className={`${display.className} relative block text-lg sm:text-2xl leading-relaxed text-slate-900`}>
+              "Transformamos presença digital em estratégia. Não é sobre estar online, é sobre marcar presença."
+            </span>
+          </blockquote>
+        </motion.figure>
       </div>
     </section>
   );

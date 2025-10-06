@@ -1,93 +1,173 @@
-'use client';
+"use client";
 
-import Link from 'next/link';
-import Image from 'next/image';
-import { useState } from 'react';
+import Link from "next/link";
+import Image from "next/image";
+import { useEffect, useMemo, useState } from "react";
+import { DM_Serif_Display, Manrope } from "next/font/google";
+
+/* ---------------------- Fontes ---------------------- */
+const display = DM_Serif_Display({ subsets: ["latin"], weight: "400" });
+const sans = Manrope({ subsets: ["latin"], weight: ["300", "400", "600", "700"] });
+
+/* ---------------------- Helpers ---------------------- */
+const links = [
+  { href: "#inicio", label: "Início" },
+  { href: "#agencia", label: "Agência" },
+  { href: "#resultados", label: "Resultados" },
+  { href: "/servicos", label: "Serviços" },
+  { href: "#duvidas", label: "Dúvidas" },
+] as const;
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const [hash, setHash] = useState<string>("");
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 6);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  useEffect(() => {
+    const updateHash = () => setHash(window.location.hash);
+    updateHash();
+    window.addEventListener("hashchange", updateHash);
+    return () => window.removeEventListener("hashchange", updateHash);
+  }, []);
+
+  // Suaviza a rolagem para âncoras internas
+  const handleAnchorClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    if (href.startsWith("#")) {
+      e.preventDefault();
+      const el = document.querySelector(href);
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth", block: "start" });
+        history.replaceState(null, "", href);
+        setHash(href);
+        setMenuOpen(false);
+      }
+    } else {
+      setMenuOpen(false);
+    }
+  };
+
+  const navLinkClass = useMemo(
+    () =>
+      "relative transition group inline-flex items-center text-sm font-medium tracking-wide",
+    []
+  );
+
+  const navUnderline = (active: boolean) =>
+    `after:absolute after:-bottom-1 after:left-1/2 after:h-[2px] after:w-0 after:-translate-x-1/2 after:rounded-full after:bg-gradient-to-r after:from-[#E9D8A6] after:to-[#C8B273] after:transition-all after:duration-300 ${
+      active ? "after:w-8 text-slate-900" : "hover:after:w-8 text-slate-700 hover:text-slate-900"
+    }`;
 
   return (
-    <header className="w-full fixed top-0 left-0 z-50 bg-white shadow-sm">
-      <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-3">
-        {/* ✅ Logo */}
+    <header
+      className={`${sans.className} fixed inset-x-0 top-0 z-50 transition-all ${
+        scrolled
+          ? "bg-white/80 backdrop-blur-md border-b border-black/10 shadow-sm"
+          : "bg-white/60 backdrop-blur-md"
+      }`}
+    >
+      <div className="mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 py-3">
+        {/* Logo */}
         <Link
           href="/"
-          className="p-1.5 rounded-xl transition hover:shadow-md hover:ring-1 hover:ring-purple-300"
+          className="rounded-xl p-1.5 transition hover:shadow-sm hover:ring-1 hover:ring-[#C7B079]/40"
+          aria-label="Página inicial"
         >
           <Image
             src="/logo-header.webp"
             alt="Logo Vibe"
-            width={48}
-            height={48}
+            width={44}
+            height={44}
             className="h-10 w-auto"
             priority
           />
         </Link>
 
-        {/* ✅ Menu desktop */}
-        <div className="hidden md:flex items-center gap-6">
-          <nav className="flex gap-6 text-sm font-medium text-zinc-800">
-            <Link href="#inicio">Início</Link>
-            <Link href="#agencia">Agência</Link>
-            <Link href="#resultados">Resultados</Link> {/* ✅ fix: rolagem interna */}
-            <Link href="/servicos">Serviços</Link>
-            <Link href="#duvidas">Dúvidas</Link>
+        {/* Desktop */}
+        <div className="hidden md:flex items-center gap-8">
+          <nav className={`${display.className} flex items-center gap-7`}>
+            {links.map((l) => (
+              <Link
+                key={l.href}
+                href={l.href}
+                onClick={(e) => handleAnchorClick(e, l.href)}
+                className={`${navLinkClass} ${navUnderline(hash === l.href)}`}
+              >
+                {l.label}
+              </Link>
+            ))}
           </nav>
 
           <Link
             href="#contato"
-            className="relative inline-flex items-center justify-center px-6 py-2 text-sm font-semibold text-white rounded-full
-                       bg-gradient-to-r from-purple-600 to-pink-500
-                       border border-white/20
-                       ring-1 ring-white/10
-                       shadow-[inset_0_1px_2px_rgba(255,255,255,0.2)]
-                       hover:brightness-110 transition-all duration-300"
+            onClick={(e) => handleAnchorClick(e, "#contato")}
+            className="group relative inline-flex items-center"
           >
-            Converse conosco
+            <span className="absolute -inset-[2px] rounded-full bg-gradient-to-r from-[#E9D8A6] via-[#F1E4BD] to-[#C8B273] opacity-70 blur-md transition group-hover:opacity-100" />
+            <span
+              className="relative inline-flex items-center justify-center rounded-full px-5 py-2 text-sm font-semibold text-slate-900"
+              style={{ background: "linear-gradient(180deg,#F5EFD8,#E9D8A6 45%,#C8B273)" }}
+            >
+              Converse conosco
+            </span>
           </Link>
         </div>
 
-        {/* ✅ Botão mobile (hamburguer) */}
+        {/* Mobile button */}
         <button
-          onClick={() => setMenuOpen(!menuOpen)}
-          className="md:hidden text-purple-700"
-          aria-label="Abrir menu"
+          onClick={() => setMenuOpen((v) => !v)}
+          className="md:hidden rounded-full p-2 text-slate-800 hover:bg-black/5"
+          aria-label={menuOpen ? "Fechar menu" : "Abrir menu"}
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth="2"
-            stroke="currentColor"
-            className="w-6 h-6"
-          >
-            {menuOpen ? (
-              <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-            ) : (
-              <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
-            )}
-          </svg>
+          {menuOpen ? (
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="h-6 w-6"><path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+          ) : (
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="h-6 w-6"><path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
+          )}
         </button>
       </div>
 
-      {/* ✅ Menu mobile (aberto) */}
-      {menuOpen && (
-        <div className="md:hidden bg-white text-center py-4 space-y-3 shadow-sm font-medium text-purple-700">
-          <Link href="#inicio" onClick={() => setMenuOpen(false)}>Início</Link><br />
-          <Link href="#agencia" onClick={() => setMenuOpen(false)}>Agência</Link><br />
-          <Link href="#resultados" onClick={() => setMenuOpen(false)}>Resultados</Link><br /> {/* ✅ fix aqui também */}
-          <Link href="/servicos" onClick={() => setMenuOpen(false)}>Serviços</Link><br />
-          <Link href="#duvidas" onClick={() => setMenuOpen(false)}>Dúvidas</Link><br />
-          <Link
-            href="#contato"
-            onClick={() => setMenuOpen(false)}
-            className="inline-block mt-2 rounded-full bg-gradient-to-r from-purple-600 to-pink-500 px-4 py-2 text-white text-sm font-semibold shadow-md border border-white/20"
-          >
-            Converse conosco
-          </Link>
-        </div>
-      )}
+      {/* Mobile menu */}
+      <div
+        className={`md:hidden overflow-hidden transition-[max-height,opacity] duration-300 ${
+          menuOpen ? "max-h-80 opacity-100" : "max-h-0 opacity-0"
+        }`}
+      >
+        <nav className={`${display.className} text-center py-3 space-y-2 text-slate-800`}>
+          {links.map((l) => (
+            <div key={l.href}>
+              <Link
+                href={l.href}
+                onClick={(e) => handleAnchorClick(e, l.href)}
+                className={`${navLinkClass} ${navUnderline(hash === l.href)} px-2 py-1`}
+              >
+                {l.label}
+              </Link>
+            </div>
+          ))}
+          <div className="pt-2">
+            <Link
+              href="#contato"
+              onClick={(e) => handleAnchorClick(e, "#contato")}
+              className="group relative inline-flex items-center"
+            >
+              <span className="absolute -inset-[2px] rounded-full bg-gradient-to-r from-[#E9D8A6] via-[#F1E4BD] to-[#C8B273] opacity-70 blur-md transition group-hover:opacity-100" />
+              <span
+                className="relative inline-flex items-center justify-center rounded-full px-4 py-2 text-sm font-semibold text-slate-900"
+                style={{ background: "linear-gradient(180deg,#F5EFD8,#E9D8A6 45%,#C8B273)" }}
+              >
+                Converse conosco
+              </span>
+            </Link>
+          </div>
+        </nav>
+      </div>
     </header>
   );
 }
