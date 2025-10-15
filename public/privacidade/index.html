@@ -1,0 +1,317 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1,viewport-fit=cover"
+    />
+    <title>Política de Privacidade • VibeDash</title>
+    <!-- Evita indexação; remova se quiser indexar -->
+    <meta name="robots" content="noindex,nofollow" />
+
+    <style>
+      :root {
+        --bg: #0a0a0a;
+        --panel: #111216;
+        --border: #23242b;
+        --text: #d9d9e3;
+        --muted: #9aa0aa;
+        --primary: #6366f1;
+        --primary-weak: rgba(99, 102, 241, 0.14);
+      }
+
+      * { box-sizing: border-box; }
+      html, body { height: 100%; }
+      body {
+        margin: 0;
+        font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji";
+        background: radial-gradient(900px 250px at 50% -80px, rgba(99,102,241,.18), transparent 60%), var(--bg);
+        color: var(--text);
+        line-height: 1.6;
+      }
+
+      .container {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 32px 20px 60px;
+      }
+
+      .hero {
+        text-align: center;
+        margin: 28px 0 24px;
+      }
+      .hero h1 {
+        margin: 0 0 10px;
+        font-size: clamp(26px, 4vw, 40px);
+        font-weight: 800;
+        letter-spacing: -0.02em;
+        color: #c7c8ff;
+      }
+      .hero .sub {
+        color: var(--muted);
+        font-size: 15px;
+      }
+      .hero .bar {
+        margin: 14px auto 0;
+        width: 92px;
+        height: 6px;
+        border-radius: 999px;
+        background: #7c7eff;
+        opacity: .6;
+      }
+      .hero p.desc {
+        max-width: 740px;
+        margin: 18px auto 0;
+        color: #c7cad6;
+        font-size: 17px;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 22px;
+        margin-top: 26px;
+      }
+      @media (min-width: 980px) {
+        .grid {
+          grid-template-columns: 260px 1fr;
+          align-items: start;
+        }
+      }
+
+      .toc {
+        position: sticky;
+        top: 24px;
+        background: var(--panel);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        padding: 14px;
+      }
+      .toc h3 {
+        margin: 4px 8px 10px;
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: .12em;
+        color: var(--muted);
+        font-weight: 700;
+      }
+      .toc a {
+        display: block;
+        padding: 10px 12px;
+        margin: 6px 0;
+        color: #b9bfd0;
+        text-decoration: none;
+        border-radius: 10px;
+        border: 1px solid transparent;
+      }
+      .toc a:hover {
+        background: #171924;
+        border-color: #23242b;
+        color: #edf0ff;
+      }
+
+      .panel {
+        background: var(--panel);
+        border: 1px solid var(--border);
+        border-radius: 18px;
+        padding: 26px;
+      }
+
+      section {
+        scroll-margin-top: 80px;
+        margin-bottom: 24px;
+      }
+      section h2 {
+        margin: 0 0 6px;
+        font-size: clamp(20px, 2.3vw, 26px);
+        color: #e7e9ff;
+      }
+      section .sep {
+        margin: 16px 0 22px;
+        height: 1px;
+        background: #20222a;
+        border: none;
+      }
+      p, li { color: #c7cad6; }
+
+      ul { padding-left: 18px; }
+      li + li { margin-top: 6px; }
+
+      .muted { color: var(--muted); font-size: 14px; }
+
+      a.link {
+        color: #aeb4ff;
+        text-decoration: underline;
+        text-underline-offset: 3px;
+      }
+
+      .badge {
+        display: inline-block;
+        padding: 6px 10px;
+        background: var(--primary-weak);
+        border: 1px solid rgba(99,102,241,.35);
+        color: #cfd2ff;
+        border-radius: 999px;
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: .02em;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header class="hero">
+        <div class="badge">VibeDash • Política de Privacidade</div>
+        <h1>Termos de Uso e Política de Privacidade</h1>
+        <div class="sub">Em vigor a partir de 14 de outubro de 2025</div>
+        <div class="bar"></div>
+        <p class="desc">
+          O <strong>VibeDash</strong> valoriza a privacidade e a segurança das informações.
+          Esta política explica como coletamos, utilizamos, armazenamos e protegemos seus dados,
+          em conformidade com a <strong>LGPD (Lei nº 13.709/2018)</strong>.
+        </p>
+      </header>
+
+      <div class="grid">
+        <!-- TOC -->
+        <aside class="toc">
+          <h3>Índice</h3>
+          <nav>
+            <a href="#introducao">1. Introdução</a>
+            <a href="#quem-somos">2. Quem somos</a>
+            <a href="#dados">3. Dados que tratamos</a>
+            <a href="#coleta">4. Como coletamos</a>
+            <a href="#finalidades">5. Finalidades</a>
+            <a href="#compartilhamento">6. Compartilhamento</a>
+            <a href="#cookies">7. Cookies</a>
+            <a href="#retencao">8. Retenção</a>
+            <a href="#seguranca">9. Segurança</a>
+            <a href="#direitos">10. Direitos do titular</a>
+            <a href="#contato">11. Contato (DPO)</a>
+          </nav>
+        </aside>
+
+        <!-- Content -->
+        <article class="panel">
+          <section id="introducao">
+            <h2>1. Introdução</h2>
+            <hr class="sep" />
+            <p>
+              Na Agência Vibe, a proteção de dados pessoais é prioridade. Esta Política descreve
+              como tratamos informações no contexto da plataforma <strong>VibeDash</strong>.
+            </p>
+          </section>
+
+          <section id="quem-somos">
+            <h2>2. Quem somos</h2>
+            <hr class="sep" />
+            <p>
+              O VibeDash é uma plataforma de dashboards que unifica e apresenta insights de contas
+              profissionais dos clientes (Instagram/Facebook via Meta Graph API e Google Analytics/Ads).
+            </p>
+          </section>
+
+          <section id="dados">
+            <h2>3. Dados pessoais que tratamos</h2>
+            <hr class="sep" />
+            <ul>
+              <li><strong>Dados de contato:</strong> nome, e-mail e telefone de usuários autorizados/representantes.</li>
+              <li><strong>Credenciais de APIs:</strong> tokens de acesso (Meta e Google) usados exclusivamente
+                  para recuperar métricas.</li>
+              <li><strong>Uso da plataforma:</strong> logs de acesso, IP, tipo de navegador e interações (páginas,
+                  cliques, tempo de sessão).</li>
+              <li><strong>Dados agregados:</strong> métricas como alcance, impressões, seguidores e engajamento.
+                  Não acessamos mensagens privadas nem senhas.</li>
+            </ul>
+          </section>
+
+          <section id="coleta">
+            <h2>4. Como coletamos dados</h2>
+            <hr class="sep" />
+            <ul>
+              <li>Cadastro e formulários de contato;</li>
+              <li>Comunicações por e-mail, chat e telefone;</li>
+              <li>Autorizações explícitas de integrações com APIs;</li>
+              <li>Eventualmente, fontes públicas/terceiros mediante consentimento.</li>
+            </ul>
+          </section>
+
+          <section id="finalidades">
+            <h2>5. Finalidades do tratamento</h2>
+            <hr class="sep" />
+            <ul>
+              <li>Gerar relatórios e dashboards com métricas;</li>
+              <li>Identificar e autenticar usuários;</li>
+              <li>Aprimorar a experiência e funcionalidades;</li>
+              <li>Cumprir obrigações legais e regulatórias;</li>
+              <li>Comunicar novidades e atualizações (opt-out disponível).</li>
+            </ul>
+          </section>
+
+          <section id="compartilhamento">
+            <h2>6. Compartilhamento de dados</h2>
+            <hr class="sep" />
+            <p>Não vendemos dados. Compartilhamos apenas quando necessário:</p>
+            <ul>
+              <li><strong>Prestadores/ferramentas</strong> (hospedagem, e-mail, banco de dados) com cláusulas contratuais de proteção;</li>
+              <li><strong>Autoridades/auditorias</strong> quando houver obrigação legal;</li>
+              <li><strong>Equipe interna</strong> com acesso mínimo necessário.</li>
+            </ul>
+          </section>
+
+          <section id="cookies">
+            <h2>7. Cookies e tecnologias similares</h2>
+            <hr class="sep" />
+            <p>
+              Usamos cookies para funcionamento, manter login, lembrar preferências e analisar uso.
+              Você pode gerenciá-los no navegador; desativar pode impactar recursos.
+            </p>
+          </section>
+
+          <section id="retencao">
+            <h2>8. Retenção e descarte</h2>
+            <hr class="sep" />
+            <p>
+              Armazenamos dados pelo tempo necessário às finalidades e prazos legais; depois,
+              eliminamos ou anonimizamos de forma segura.
+            </p>
+          </section>
+
+          <section id="seguranca">
+            <h2>9. Segurança da informação</h2>
+            <hr class="sep" />
+            <p>
+              Adotamos medidas técnicas e administrativas (criptografia de tokens, controle de acessos,
+              monitoramento) para proteger dados.
+            </p>
+          </section>
+
+          <section id="direitos">
+            <h2>10. Direitos do titular</h2>
+            <hr class="sep" />
+            <p>
+              Você pode solicitar acesso, correção, portabilidade, anonimização/eliminação, oposição e
+              revogação de consentimentos, observadas as bases legais e obrigações de retenção.
+            </p>
+          </section>
+
+          <section id="contato">
+            <h2>11. Encarregado e contato</h2>
+            <hr class="sep" />
+            <p>
+              Dúvidas ou solicitações sobre privacidade? Fale com o nosso DPO:
+              <a class="link" href="mailto:vibecomunicacaoemarketing@gmail.com">
+                vibecomunicacaoemarketing@gmail.com
+              </a>.
+            </p>
+          </section>
+
+          <p class="muted">
+            Poderemos atualizar esta Política periodicamente. A versão vigente estará sempre disponível nesta página.
+          </p>
+        </article>
+      </div>
+    </div>
+  </body>
+</html>
