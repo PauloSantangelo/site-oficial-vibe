@@ -19,59 +19,72 @@
         --muted: #9aa0aa;
         --primary: #6366f1;
         --primary-weak: rgba(99, 102, 241, 0.14);
+        --container: 1100px;
+        --radius: 18px;
+        --gap: 22px;
+        --stickyTop: 24px;
       }
 
-      * { box-sizing: border-box; }
-      html, body { height: 100%; }
+      * { box-sizing: border-box }
+      html, body { height: 100% }
+      html { scroll-behavior: smooth } /* âncoras mais suaves */
+
       body {
         margin: 0;
         font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji";
-        background: radial-gradient(900px 250px at 50% -80px, rgba(99,102,241,.18), transparent 60%), var(--bg);
+        background:
+          radial-gradient(900px 250px at 50% -80px, rgba(99,102,241,.18), transparent 60%),
+          var(--bg);
         color: var(--text);
         line-height: 1.6;
       }
 
       .container {
-        max-width: 1100px;
+        max-width: var(--container);
         margin: 0 auto;
-        padding: 32px 20px 60px;
+        padding: clamp(20px, 4vw, 32px) clamp(14px, 4vw, 20px) 64px;
       }
 
-      .hero {
-        text-align: center;
-        margin: 28px 0 24px;
-      }
+      /* ================= HERO ================= */
+      .hero { text-align: center; margin: 20px 0 18px }
       .hero h1 {
         margin: 0 0 10px;
-        font-size: clamp(26px, 4vw, 40px);
+        font-size: clamp(24px, 4.5vw, 40px);
         font-weight: 800;
         letter-spacing: -0.02em;
         color: #c7c8ff;
       }
-      .hero .sub {
-        color: var(--muted);
-        font-size: 15px;
-      }
+      .hero .sub { color: var(--muted); font-size: clamp(13px, 2.8vw, 15px) }
       .hero .bar {
         margin: 14px auto 0;
-        width: 92px;
-        height: 6px;
+        width: 92px; height: 6px;
         border-radius: 999px;
-        background: #7c7eff;
-        opacity: .6;
+        background: #7c7eff; opacity: .6;
       }
       .hero p.desc {
         max-width: 740px;
         margin: 18px auto 0;
         color: #c7cad6;
-        font-size: 17px;
+        font-size: clamp(15px, 3.4vw, 17px);
+      }
+      .badge {
+        display: inline-block;
+        padding: 6px 10px;
+        background: var(--primary-weak);
+        border: 1px solid rgba(99,102,241,.35);
+        color: #cfd2ff;
+        border-radius: 999px;
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: .02em;
       }
 
+      /* ================= LAYOUT ================= */
       .grid {
         display: grid;
         grid-template-columns: 1fr;
-        gap: 22px;
-        margin-top: 26px;
+        gap: var(--gap);
+        margin-top: 22px;
       }
       @media (min-width: 980px) {
         .grid {
@@ -80,9 +93,10 @@
         }
       }
 
+      /* ===== TOC DESKTOP ===== */
       .toc {
         position: sticky;
-        top: 24px;
+        top: var(--stickyTop);
         background: var(--panel);
         border: 1px solid var(--border);
         border-radius: 16px;
@@ -98,12 +112,13 @@
       }
       .toc a {
         display: block;
-        padding: 10px 12px;
+        padding: 12px 12px;
         margin: 6px 0;
         color: #b9bfd0;
         text-decoration: none;
         border-radius: 10px;
         border: 1px solid transparent;
+        touch-action: manipulation; /* hit-area melhor no mobile */
       }
       .toc a:hover {
         background: #171924;
@@ -111,34 +126,70 @@
         color: #edf0ff;
       }
 
+      /* ===== TOC MOBILE (accordion) ===== */
+      .toc-mobile { display: block }
+      @media (min-width: 980px) { .toc-mobile { display: none } } /* só mobile */
+
+      .toc-mobile details {
+        background: var(--panel);
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        overflow: hidden;
+      }
+      .toc-mobile summary {
+        list-style: none;
+        cursor: pointer;
+        padding: 14px 16px;
+        font-weight: 700;
+        color: #cfd2ff;
+      }
+      .toc-mobile summary::marker,
+      .toc-mobile summary::-webkit-details-marker { display: none }
+      .toc-mobile summary span {
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: .12em;
+        color: var(--muted);
+        display: block;
+      }
+      .toc-mobile nav { padding: 0 10px 10px }
+      .toc-mobile a {
+        display: block;
+        padding: 12px 10px;
+        margin: 6px 0;
+        color: #b9bfd0;
+        text-decoration: none;
+        border-radius: 10px;
+        border: 1px solid transparent;
+      }
+      .toc-mobile a:active,
+      .toc-mobile a:hover {
+        background: #171924;
+        border-color: #23242b;
+        color: #edf0ff;
+      }
+
+      /* ===== CONTENT PANEL ===== */
       .panel {
         background: var(--panel);
         border: 1px solid var(--border);
-        border-radius: 18px;
-        padding: 26px;
+        border-radius: var(--radius);
+        padding: clamp(18px, 4vw, 26px);
       }
 
-      section {
-        scroll-margin-top: 80px;
-        margin-bottom: 24px;
-      }
+      section { scroll-margin-top: 84px; margin-bottom: 24px }
       section h2 {
         margin: 0 0 6px;
-        font-size: clamp(20px, 2.3vw, 26px);
+        font-size: clamp(18px, 3.2vw, 26px);
         color: #e7e9ff;
       }
-      section .sep {
-        margin: 16px 0 22px;
-        height: 1px;
-        background: #20222a;
-        border: none;
-      }
-      p, li { color: #c7cad6; }
+      section .sep { margin: 16px 0 22px; height: 1px; background: #20222a; border: none }
+      p, li { color: #c7cad6; font-size: clamp(15px, 3.6vw, 16px) }
 
-      ul { padding-left: 18px; }
-      li + li { margin-top: 6px; }
+      ul { padding-left: 18px }
+      li + li { margin-top: 6px }
 
-      .muted { color: var(--muted); font-size: 14px; }
+      .muted { color: var(--muted); font-size: clamp(13px, 3.2vw, 14px) }
 
       a.link {
         color: #aeb4ff;
@@ -146,16 +197,10 @@
         text-underline-offset: 3px;
       }
 
-      .badge {
-        display: inline-block;
-        padding: 6px 10px;
-        background: var(--primary-weak);
-        border: 1px solid rgba(99,102,241,.35);
-        color: #cfd2ff;
-        border-radius: 999px;
-        font-size: 12px;
-        font-weight: 600;
-        letter-spacing: .02em;
+      /* pequenos refinamentos em telas muito estreitas */
+      @media (max-width: 360px) {
+        .badge { font-size: 11px }
+        .toc-mobile a { padding: 10px 8px }
       }
     </style>
   </head>
@@ -173,8 +218,31 @@
         </p>
       </header>
 
+      <!-- TOC MOBILE (accordion) -->
+      <div class="toc-mobile">
+        <details>
+          <summary>
+            <span>Índice</span>
+            Política – navegue pelos tópicos
+          </summary>
+          <nav>
+            <a href="#introducao">1. Introdução</a>
+            <a href="#quem-somos">2. Quem somos</a>
+            <a href="#dados">3. Dados que tratamos</a>
+            <a href="#coleta">4. Como coletamos</a>
+            <a href="#finalidades">5. Finalidades</a>
+            <a href="#compartilhamento">6. Compartilhamento</a>
+            <a href="#cookies">7. Cookies</a>
+            <a href="#retencao">8. Retenção</a>
+            <a href="#seguranca">9. Segurança</a>
+            <a href="#direitos">10. Direitos do titular</a>
+            <a href="#contato">11. Contato (DPO)</a>
+          </nav>
+        </details>
+      </div>
+
       <div class="grid">
-        <!-- TOC -->
+        <!-- TOC DESKTOP -->
         <aside class="toc">
           <h3>Índice</h3>
           <nav>
