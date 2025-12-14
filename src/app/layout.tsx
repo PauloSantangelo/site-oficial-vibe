@@ -1,21 +1,46 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Playfair_Display, Inter } from "next/font/google";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+/* ------------------------------
+   FONTES
+------------------------------- */
+
+/* Serif moderna (similar ao estilo do seu logo) */
+const playfair = Playfair_Display({
+  variable: "--font-serif",
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+});
+
+/* Sans moderna para textos e UI */
+const inter = Inter({
+  variable: "--font-sans",
   subsets: ["latin"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+/* ------------------------------
+   METADADOS
+------------------------------- */
 
 export const metadata: Metadata = {
-  title: "Vibe Digital",
-  description: "Transformamos ideias em presença digital estratégica.",
+  title: "VibeMed | Marketing Médico Estratégico",
+  description:
+    "Especialistas em marketing médico: posicionamento premium, websites modernos e campanhas éticas que ampliam autoridade médica.",
+  keywords: [
+    "marketing médico",
+    "marketing para médicos",
+    "sites para médicos",
+    "posicionamento médico",
+    "vibemed",
+  ],
+  robots: "index, follow",
+  authors: [{ name: "VibeMed" }],
 };
+
+/* ------------------------------
+   LAYOUT PRINCIPAL
+------------------------------- */
 
 export default function RootLayout({
   children,
@@ -25,7 +50,8 @@ export default function RootLayout({
   return (
     <html lang="pt-BR" className="scroll-smooth">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-[#0a0a23] text-white transition-colors duration-300`}
+        className={`${playfair.variable} ${inter.variable} antialiased 
+        bg-[#0d1b2a] text-[#e0e5eb] transition-colors duration-300`}
       >
         {children}
       </body>

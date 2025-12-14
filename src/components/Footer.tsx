@@ -52,7 +52,7 @@ export default function Footer() {
           {/* Marca + texto */}
           <div className="text-center md:text-left">
             <Link href="/" aria-label="Página inicial" className="inline-flex items-center gap-3">
-              <Image src="/logo-header.webp" alt="Logo Vibe" width={44} height={44} className="h-10 w-auto" />
+              <Image src="/simbolo2.webp" alt="Logo Vibe" width={44} height={44} className="h-10 w-auto" />
               <span className={`${display.className} text-xl`}>Agência Vibe</span>
             </Link>
             <p className="mt-3 max-w-sm text-sm text-white/80">

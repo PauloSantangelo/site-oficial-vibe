@@ -2,6 +2,7 @@
 
 import Header from './Header';
 import InicioSection from './InicioSection';
+import BannerStories from './BannerStories';
 import ResumoComprovaSection from './ResumoComprovaSection';
 import AgenciaSection from './AgenciaSection';
 import EspecialidadesSection from './EspecialidadesSections'; // ✅ IMPORTAÇÃO
@@ -19,6 +20,7 @@ export default function Home() {
       <Header />
       <InicioSection />
       <ResumoComprovaSection />
+      <BannerStories />
       <AgenciaSection />
       <EspecialidadesSection /> {/* ✅ INSERÇÃO */}
       <ResultadosSection />
