@@ -6,9 +6,6 @@ import { useEffect, useMemo, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { DM_Serif_Display, Manrope } from "next/font/google";
 
-/* ---------------------- Cor de destaque ---------------------- */
-const GOLD = "#E1AD01";
-
 /* ---------------------- WhatsApp ---------------------- */
 const WHATSAPP_NUMBER = "5514991042262";
 const WHATSAPP_MESSAGE =
@@ -54,7 +51,6 @@ export default function Header() {
     e: React.MouseEvent<HTMLAnchorElement>,
     href: string
   ) => {
-    // Links normais (/servicos, /sites)
     if (!href.startsWith("#")) {
       setMenuOpen(false);
       return;
@@ -62,14 +58,12 @@ export default function Header() {
 
     e.preventDefault();
 
-    // Se NÃO estiver na home, navega para /#hash
     if (!isHome) {
       router.push(`/${href}`);
       setMenuOpen(false);
       return;
     }
 
-    // Se estiver na home, scroll suave
     const id = href.substring(1);
     document.getElementById(id)?.scrollIntoView({
       behavior: "smooth",
