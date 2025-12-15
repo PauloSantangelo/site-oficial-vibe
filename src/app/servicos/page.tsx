@@ -2,9 +2,8 @@
 
 import type React from "react";
 import { useEffect, useMemo, useState } from "react";
-import { motion, easeInOut } from "framer-motion";
 import Link from "next/link";
-import Header from "@/components/Header";
+import Header from "@/components/Header"; // Header do componente
 import { DM_Serif_Display, Manrope } from "next/font/google";
 import {
   ArrowRight,
@@ -74,7 +73,7 @@ const services: Service[] = [
       "Edição pensada para retenção (gancho, ritmo, clareza).",
       "Conteúdo para Reels, institucionais e campanhas.",
     ],
-    deliverables: ["Roteirização", "Captação", "Edição e versões por formato"],
+    deliverables: ["Roteirização", "Captação", "Edição e versões"],
     cta: { label: "Solicitar vídeo", href: "/contato?servico=filmaker" },
     icon: Clapperboard,
     tone: "light",
@@ -90,7 +89,7 @@ const services: Service[] = [
       "Paleta, tipografia e aplicações consistentes.",
       "Direção de arte para elevar o padrão do conteúdo.",
     ],
-    deliverables: ["Logo", "Sistema visual", "Manual e aplicações"],
+    deliverables: ["Logo", "Sistema visual", "Manual"],
     cta: { label: "Criar identidade", href: "/contato?servico=branding" },
     icon: Palette,
     tone: "dark",
@@ -243,9 +242,7 @@ export default function ServicosPage() {
                         }}
                       >
                         <Icon
-                          className={`h-4 w-4 ${
-                            isActive ? "text-[#07101E]" : "text-white"
-                          }`}
+                          className={`h-4 w-4 ${isActive ? "text-[#07101E]" : "text-white"}`}
                         />
                       </span>
                       <span className="text-sm font-medium text-white truncate">
@@ -278,9 +275,7 @@ export default function ServicosPage() {
             <div className="mx-auto max-w-7xl px-6 grid gap-12 lg:grid-cols-2">
               <div>
                 <Icon className="h-8 w-8 mb-4" style={{ color: GOLD }} />
-                <h2 className={`${display.className} text-4xl mb-3`}>
-                  {s.title}
-                </h2>
+                <h2 className={`${display.className} text-4xl mb-3`}>{s.title}</h2>
                 <p className="opacity-80 mb-6">{s.subtitle}</p>
 
                 <p className="text-lg mb-6">{s.promise}</p>
