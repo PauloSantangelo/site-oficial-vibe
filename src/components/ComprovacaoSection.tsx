@@ -8,13 +8,17 @@ import { DM_Serif_Display, Manrope } from "next/font/google";
 const display = DM_Serif_Display({ subsets: ["latin"], weight: "400" });
 const sans = Manrope({ subsets: ["latin"], weight: ["300","400","600","700"] });
 
-/* ---------------------- Prints (somente imagens) ---------------------- */
+/* ---------------------- Configuração das Imagens ---------------------- */
+// Mapeando as imagens da sua pasta public/organico/
 const prints = [
-  { src: "/provas/prints-organico-01.png", alt: "Painel de resultados orgânicos 01", caption: "+15M views • 967k interações" },
-  { src: "/provas/prints-organico-02.png", alt: "Painel de resultados orgânicos 02", caption: "+136k visualizações em 30 dias" },
-  { src: "/provas/relatorio-crescimento.png", alt: "Relatório de crescimento", caption: "+52,5% contas alcançadas" },
-  { src: "/provas/print-feed.png", alt: "Grade de conteúdos com alta performance", caption: "Posts e Reels em tração" },
-  { src: "/provas/insights-reel.png", alt: "Insights detalhados de Reel", caption: "Retenção e engajamento" },
+  { src: "/organico/trafego.jpeg", alt: "Resultado Tráfego Pago 01", type: "Tráfego Pago" },
+  { src: "/organico/trafego2.jpeg", alt: "Resultado Tráfego Pago 02", type: "Tráfego Pago" },
+  { src: "/organico/organico7.jpeg", alt: "Alcance de 186k", type: "Orgânico" },
+  { src: "/organico/organico10.jpeg", alt: "Alcance de 75k", type: "Orgânico" },
+  { src: "/organico/organico12.jpeg", alt: "Alcance de 62k", type: "Orgânico" },
+  { src: "/organico/organico2.jpeg", alt: "Visualizações de 55k", type: "Orgânico" },
+  { src: "/organico/organico5.jpeg", alt: "Resultados 47k", type: "Orgânico" },
+  { src: "/organico/organico4.jpeg", alt: "Crescimento 40k", type: "Orgânico" },
 ] as const;
 
 export default function ComprovacaoSection() {
@@ -22,115 +26,75 @@ export default function ComprovacaoSection() {
     <section
       id="provas"
       aria-labelledby="comprovacao-heading"
-      className={`${sans.className} relative w-full bg-[#121418] text-white py-24 px-4 sm:px-6 overflow-hidden`}
+      className={`${sans.className} relative w-full bg-[#0B0D10] text-white py-24 px-4 sm:px-6 overflow-hidden`}
     >
-      {/* textura / vinheta sutil */}
-      <div aria-hidden className="absolute inset-0 -z-10 bg-[radial-gradient(110%_80%_at_50%_10%,#1B1E25_0%,#121418_60%,#101216_100%)]" />
-      <div aria-hidden className="absolute inset-0 -z-10 opacity-[0.06] [background-image:linear-gradient(to_right,rgba(255,255,255,.4)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,.4)_1px,transparent_1px)] [background-size:48px_48px]" />
+      {/* Background com tom Navy profundo da VibeMed */}
+      <div aria-hidden className="absolute inset-0 -z-10 bg-[radial-gradient(110%_80%_at_50%_10%,#12161D_0%,#0B0D10_100%)]" />
+      <div aria-hidden className="absolute inset-0 -z-10 opacity-[0.04] [background-image:linear-gradient(to_right,rgba(255,255,255,.4)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,.4)_1px,transparent_1px)] [background-size:40px_40px]" />
 
-      <div className="mx-auto max-w-6xl">
+      <div className="mx-auto max-w-7xl">
         <motion.div
           initial={{ opacity: 0, y: 18 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.4 }}
           transition={{ duration: 0.6, ease: easeInOut }}
-          className="text-center mb-14"
+          className="text-center mb-16"
         >
-          <h2 id="comprovacao-heading" className={`${display.className} text-3xl sm:text-4xl mb-4`}>
-            Marketing de resultado orgânico
+          <h2 id="comprovacao-heading" className={`${display.className} text-4xl sm:text-5xl mb-4 text-white`}>
+            Resultados que falam por si
           </h2>
-          <p className="mx-auto max-w-2xl text-white/80">
-            Prints reais de desempenho: alcance, visualizações, interações e evolução contínua.
+          <p className="mx-auto max-w-2xl text-white/60 text-lg italic">
+            "Números não mentem. Nossa estratégia une o alcance exponencial do orgânico com a precisão cirúrgica do tráfego pago."
           </p>
         </motion.div>
 
-        {/* Collage responsivo (somente imagens) */}
-        <div className="grid grid-cols-1 gap-5 md:grid-cols-12">
-          {/* Hero 1 */}
-          <figure className="relative md:col-span-5 overflow-hidden rounded-2xl border border-white/10 bg-white/[0.04] shadow-xl">
-            <Image
-              src={prints[0].src}
-              alt={prints[0].alt}
-              width={1200}
-              height={800}
-              className="h-full w-full object-contain bg-black/20"
-              priority
-            />
-            <figcaption className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/55 to-transparent p-3 text-xs text-white/85">
-              {prints[0].caption}
-            </figcaption>
-          </figure>
-
-          {/* Hero 2 */}
-          <figure className="relative md:col-span-4 overflow-hidden rounded-2xl border border-white/10 bg-white/[0.04] shadow-xl">
-            <Image
-              src={prints[1].src}
-              alt={prints[1].alt}
-              width={1200}
-              height={800}
-              className="h-full w-full object-contain bg-black/20"
-            />
-            <figcaption className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/55 to-transparent p-3 text-xs text-white/85">
-              {prints[1].caption}
-            </figcaption>
-          </figure>
-
-          {/* Stack lateral */}
-          <div className="md:col-span-3 grid grid-rows-2 gap-5">
-            <figure className="relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.04] shadow-xl">
+        {/* Grid de Provas Sociais */}
+        <div className="columns-1 gap-5 sm:columns-2 lg:columns-4 space-y-5">
+          {prints.map((print, index) => (
+            <motion.figure
+              key={index}
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: index * 0.05 }}
+              className="relative break-inside-avoid overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03] shadow-2xl group transition-all hover:border-[#C8B273]/40"
+            >
               <Image
-                src={prints[2].src}
-                alt={prints[2].alt}
-                width={900}
-                height={600}
-                className="h-full w-full object-contain bg-black/20"
+                src={print.src}
+                alt={print.alt}
+                width={500}
+                height={800}
+                className="w-full object-cover transition duration-500 group-hover:scale-105"
               />
-              <figcaption className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/55 to-transparent p-3 text-xs text-white/85">
-                {prints[2].caption}
-              </figcaption>
-            </figure>
-            <figure className="relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.04] shadow-xl">
-              <Image
-                src={prints[3].src}
-                alt={prints[3].alt}
-                width={900}
-                height={600}
-                className="h-full w-full object-contain bg-black/20"
-              />
-              <figcaption className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/55 to-transparent p-3 text-xs text-white/85">
-                {prints[3].caption}
-              </figcaption>
-            </figure>
-          </div>
-
-          {/* Wide bottom */}
-          <figure className="relative md:col-span-12 overflow-hidden rounded-2xl border border-white/10 bg-white/[0.04] shadow-xl">
-            <Image
-              src={prints[4].src}
-              alt={prints[4].alt}
-              width={1600}
-              height={700}
-              className="h-full w-full object-contain bg-black/20"
-            />
-            <figcaption className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/55 to-transparent p-3 text-xs text-white/85">
-              {prints[4].caption}
-            </figcaption>
-          </figure>
+              
+              {/* Overlay com o tipo de resultado */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                <span className="text-[10px] uppercase tracking-widest font-bold text-[#E9D8A6] bg-[#E9D8A6]/10 px-2 py-1 rounded-md border border-[#E9D8A6]/20">
+                  {print.type}
+                </span>
+              </div>
+            </motion.figure>
+          ))}
         </div>
 
-        {/* CTA */}
-        <div className="mt-12 text-center">
+        {/* Frase de autoridade final */}
+        <div className="mt-16 text-center space-y-8">
+            <div className="h-px w-24 bg-gradient-to-r from-transparent via-[#C8B273] to-transparent mx-auto" />
+            <p className={`${display.className} text-2xl text-white/90`}>
+                Pronto para ser o próximo caso de sucesso?
+            </p>
+
           <a
-            href="#contato"
+            href="https://wa.me/5514991042262?text=Olá,%20vi%20seus%20resultados%20e%20gostaria%20de%20conhecer%20os%20planos%20da%20VibeMed."
+            target="_blank"
             className="group relative inline-flex items-center"
-            aria-label="Quero resultados assim"
           >
             <span className="absolute -inset-[2px] rounded-full bg-gradient-to-r from-[#E9D8A6] via-[#F1E4BD] to-[#C8B273] opacity-70 blur-md transition group-hover:opacity-100" />
             <span
-              className="relative inline-flex items-center justify-center rounded-full px-7 py-3 text-base font-semibold text-slate-900"
+              className="relative inline-flex items-center justify-center rounded-full px-10 py-4 text-base font-bold text-slate-900"
               style={{ background: "linear-gradient(180deg,#F5EFD8,#E9D8A6 45%,#C8B273)" }}
             >
-              Quero resultados assim
+              Quero esses resultados na minha clínica
             </span>
           </a>
         </div>

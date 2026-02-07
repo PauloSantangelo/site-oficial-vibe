@@ -3,7 +3,7 @@
 import type React from "react";
 import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
-import Header from "@/components/Header"; // Header do componente
+import Header from "@/components/Header";
 import { DM_Serif_Display, Manrope } from "next/font/google";
 import {
   ArrowRight,
@@ -40,6 +40,9 @@ type Service = {
   tone: "dark" | "light";
 };
 
+/* ---------------------- WhatsApp Config ---------------------- */
+const WHATSAPP_URL = "https://wa.me/5514991042262?text=Olá,%20gostaria%20de%20conhecer%20os%20planos%20da%20VibeMed.";
+
 /* ---------------------- Serviços ---------------------- */
 const services: Service[] = [
   {
@@ -58,7 +61,7 @@ const services: Service[] = [
       "Criação de posts + stories",
       "Relatórios e otimizações",
     ],
-    cta: { label: "Ver planos", href: "/contato?servico=redes-sociais" },
+    cta: { label: "Ver planos", href: WHATSAPP_URL },
     icon: Layers3,
     tone: "dark",
   },
@@ -74,7 +77,7 @@ const services: Service[] = [
       "Conteúdo para Reels, institucionais e campanhas.",
     ],
     deliverables: ["Roteirização", "Captação", "Edição e versões"],
-    cta: { label: "Solicitar vídeo", href: "/contato?servico=filmaker" },
+    cta: { label: "Solicitar vídeo", href: WHATSAPP_URL },
     icon: Clapperboard,
     tone: "light",
   },
@@ -90,7 +93,7 @@ const services: Service[] = [
       "Direção de arte para elevar o padrão do conteúdo.",
     ],
     deliverables: ["Logo", "Sistema visual", "Manual"],
-    cta: { label: "Criar identidade", href: "/contato?servico=branding" },
+    cta: { label: "Criar identidade", href: WHATSAPP_URL },
     icon: Palette,
     tone: "dark",
   },
@@ -106,7 +109,7 @@ const services: Service[] = [
       "Estrutura clara com CTA bem posicionado.",
     ],
     deliverables: ["Arquitetura", "UI moderna", "Deploy e acompanhamento"],
-    cta: { label: "Quero meu site", href: "/contato?servico=sites" },
+    cta: { label: "Quero meu site", href: WHATSAPP_URL },
     icon: Globe,
     tone: "light",
   },
@@ -122,7 +125,7 @@ const services: Service[] = [
       "Materiais para proposta, mídia kit e institucional.",
     ],
     deliverables: ["Copy", "Design", "Versões finais"],
-    cta: { label: "Solicitar apresentação", href: "/contato?servico=pdf" },
+    cta: { label: "Solicitar apresentação", href: WHATSAPP_URL },
     icon: FileText,
     tone: "dark",
   },
@@ -138,7 +141,7 @@ const services: Service[] = [
       "Acompanhamento transparente e focado em resultado.",
     ],
     deliverables: ["Setup", "Criativos", "Otimizações"],
-    cta: { label: "Receber proposta", href: "/contato?servico=trafego" },
+    cta: { label: "Receber proposta", href: WHATSAPP_URL },
     icon: BarChart3,
     tone: "light",
   },
@@ -194,7 +197,6 @@ export default function ServicosPage() {
         />
 
         <div className="mx-auto max-w-7xl px-6 grid gap-12 lg:grid-cols-[1.2fr_0.8fr]">
-          {/* Texto */}
           <div>
             <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-white/80">
               <Megaphone className="h-4 w-4" />
@@ -211,7 +213,6 @@ export default function ServicosPage() {
             </p>
           </div>
 
-          {/* Navegação lateral */}
           <aside className="lg:sticky lg:top-28">
             <div className="rounded-3xl border border-white/10 bg-white/5 p-5">
               <div className="text-white font-semibold mb-2">
@@ -289,9 +290,12 @@ export default function ServicosPage() {
                   ))}
                 </ul>
 
+                {/* Botão direcionando para WhatsApp */}
                 <Link
                   href={s.cta.href}
-                  className="inline-flex items-center gap-2 mt-8 rounded-full px-6 py-3 font-semibold"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 mt-8 rounded-full px-6 py-3 font-semibold transition-transform hover:scale-105"
                   style={{
                     background: `linear-gradient(180deg,#F5EFD8,#E9D8A6 45%,#C8B273)`,
                     color: INK,
@@ -302,7 +306,6 @@ export default function ServicosPage() {
                 </Link>
               </div>
 
-              {/* O que entregamos */}
               <div className="rounded-3xl border border-white/10 bg-white/5 p-6">
                 <div className="font-semibold mb-4">O que entregamos</div>
                 <ul className="space-y-3">

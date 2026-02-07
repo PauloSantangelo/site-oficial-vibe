@@ -2,7 +2,8 @@
 
 import { motion, Variants, easeInOut } from "framer-motion";
 import Link from "next/link";
-import Image from "next/image";
+// Trocamos Image por Lucide Icons
+import { Instagram, Layout, MousePointerClick, LucideIcon } from "lucide-react";
 import { DM_Serif_Display, Manrope } from "next/font/google";
 
 /* ---------------------- Fontes ---------------------- */
@@ -11,7 +12,7 @@ const sans = Manrope({ subsets: ["latin"], weight: ["300","400","600","700"] });
 
 interface ServicoPrincipal {
   titulo: string;
-  icone: string;
+  Icone: LucideIcon; // Agora tratamos como um componente
   descricao: string;
 }
 
@@ -29,19 +30,19 @@ export default function ServicosPreviewSection() {
   const servicosPrincipais: ServicoPrincipal[] = [
     {
       titulo: "Gerenciamento de Redes Sociais",
-      icone: "/icons/social-media.svg",
+      Icone: Instagram,
       descricao:
         "Conteúdo estratégico, calendário editorial, relatórios e roteiros para captação que engajam de verdade.",
     },
     {
       titulo: "Criação de Sites e Landing Pages",
-      icone: "/icons/website.svg",
+      Icone: Layout,
       descricao:
         "Experiência, conversão e SEO em interfaces sob medida — do conceito ao publish.",
     },
     {
       titulo: "Tráfego Pago (Meta & Google)",
-      icone: "/icons/ads.svg",
+      Icone: MousePointerClick,
       descricao:
         "Campanhas otimizadas, segmentação precisa e mensuração clara para gerar leads reais.",
     },
@@ -94,16 +95,15 @@ export default function ServicosPreviewSection() {
               style={{ background: "linear-gradient(90deg,#E9D8A6,#C8B273)" }}
             />
 
-            <div className="mb-5 inline-flex h-12 w-12 items-center justify-center rounded-full border border-white/10 bg-white/5">
-              <Image
-                src={servico.icone}
-                alt=""
-                width={26}
-                height={26}
-                className="opacity-90"
-                aria-hidden
+            {/* Container do Ícone ajustado */}
+            <div className="mb-5 inline-flex h-12 w-12 items-center justify-center rounded-full border border-white/10 bg-white/5 transition-colors group-hover:border-[#C8B273]/30">
+              <servico.Icone 
+                size={24} 
+                className="text-[#E9D8A6] transition-transform group-hover:scale-110" 
+                strokeWidth={1.5}
               />
             </div>
+            
             <h3 className={`${display.className} text-xl text-white`}>{servico.titulo}</h3>
             <p className="mt-2 text-sm leading-relaxed text-white/80">{servico.descricao}</p>
 

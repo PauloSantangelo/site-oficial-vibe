@@ -7,6 +7,7 @@ import ResumoComprovaSection from './ResumoComprovaSection';
 import AgenciaSection from './AgenciaSection';
 import EspecialidadesSection from './EspecialidadesSections'; // ✅ IMPORTAÇÃO
 import ResultadosSection from './ResultadosSection';
+import PerfilImagemSection from './PerfilImagemSection'; // ✅ IMPORTAÇÃO
 import ComprovacaoSection from './ComprovacaoSection'; // ✅ IMPORTAÇÃO
 import ServicosPreviewSection from './ServicosPreviewSection'; // ✅ IMPORTAÇÃO
 import ServicesHighlightsSection from './ServicesHighlightsSection';
@@ -23,6 +24,7 @@ export default function Home() {
       <BannerStories />
       <AgenciaSection />
       <EspecialidadesSection /> {/* ✅ INSERÇÃO */}
+      <PerfilImagemSection /> {/* ✅ INSERÇÃO */}
       <ResultadosSection />
       <ComprovacaoSection /> {/* ✅ INSERÇÃO */}
       <ServicosPreviewSection /> {/* ✅ INSERÇÃO */}
