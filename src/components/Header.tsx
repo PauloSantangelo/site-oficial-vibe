@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react"; // ✅ useMemo removido para corrigir erro de build
 import { usePathname, useRouter } from "next/navigation";
 import { DM_Serif_Display, Manrope } from "next/font/google";
 
@@ -34,7 +34,7 @@ export default function Header() {
   // Sincroniza o destaque do menu
   useEffect(() => {
     if (isHome) {
-      const h = window.location.hash || "#inicio";
+      const h = typeof window !== "undefined" ? window.location.hash || "#inicio" : "#inicio";
       setActiveHash(h);
     } else {
       setActiveHash(pathname);
@@ -42,7 +42,6 @@ export default function Header() {
   }, [pathname, isHome]);
 
   const handleAnchorClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    // 1. Se NÃO for um link interno (ex: /servicos), deixa o Link padrão agir
     if (!href.startsWith("#")) {
       setMenuOpen(false);
       return;
@@ -50,23 +49,18 @@ export default function Header() {
 
     e.preventDefault();
 
-    // 2. Se não estiver na home, força a volta para a raiz com a hashtag
-    // Isso evita o erro 404 porque o Next.js carregará a "/" e depois o scroll agirá
     if (!isHome) {
       router.push(`/${href}`);
       setMenuOpen(false);
       return;
     }
 
-    // 3. Comportamento na Home: Scroll Suave
     const id = href.substring(1);
     const element = document.getElementById(id);
 
     if (element) {
       element.scrollIntoView({ behavior: "smooth", block: "start" });
       
-      // ✅ Atualiza a URL sem o símbolo # para ficar estético
-      // Mas mantemos a lógica interna funcionando
       const newPath = href === "#inicio" ? "/" : `/${id}`;
       window.history.pushState(null, "", newPath);
       
@@ -104,7 +98,7 @@ export default function Header() {
             ))}
           </nav>
 
-          <Link href={WHATSAPP_LINK} target="_blank" className="group relative inline-flex items-center">
+          <Link href={WHATSAPP_LINK} target="_blank" rel="noopener noreferrer" className="group relative inline-flex items-center">
             <span className="absolute -inset-[1px] rounded-full bg-gradient-to-r from-[#E1AD01] to-[#C99600] opacity-50 blur-sm" />
             <span className="relative rounded-full px-5 py-2 text-sm font-bold text-white bg-[#07101E]">
               Conversar agora
@@ -113,7 +107,7 @@ export default function Header() {
         </div>
 
         {/* Mobile Toggle */}
-        <button onClick={() => setMenuOpen(!menuOpen)} className="md:hidden p-2 text-2xl">
+        <button onClick={() => setMenuOpen(!menuOpen)} className="md:hidden p-2 text-2xl" aria-label="Toggle Menu">
           {menuOpen ? "✕" : "☰"}
         </button>
       </div>

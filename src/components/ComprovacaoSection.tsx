@@ -9,7 +9,6 @@ const display = DM_Serif_Display({ subsets: ["latin"], weight: "400" });
 const sans = Manrope({ subsets: ["latin"], weight: ["300","400","600","700"] });
 
 /* ---------------------- Configuração das Imagens ---------------------- */
-// Mapeando as imagens da sua pasta public/organico/
 const prints = [
   { src: "/organico/trafego.jpeg", alt: "Resultado Tráfego Pago 01", type: "Tráfego Pago" },
   { src: "/organico/trafego2.jpeg", alt: "Resultado Tráfego Pago 02", type: "Tráfego Pago" },
@@ -28,7 +27,7 @@ export default function ComprovacaoSection() {
       aria-labelledby="comprovacao-heading"
       className={`${sans.className} relative w-full bg-[#0B0D10] text-white py-24 px-4 sm:px-6 overflow-hidden`}
     >
-      {/* Background com tom Navy profundo da VibeMed */}
+      {/* Background decorativo */}
       <div aria-hidden className="absolute inset-0 -z-10 bg-[radial-gradient(110%_80%_at_50%_10%,#12161D_0%,#0B0D10_100%)]" />
       <div aria-hidden className="absolute inset-0 -z-10 opacity-[0.04] [background-image:linear-gradient(to_right,rgba(255,255,255,.4)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,.4)_1px,transparent_1px)] [background-size:40px_40px]" />
 
@@ -43,8 +42,9 @@ export default function ComprovacaoSection() {
           <h2 id="comprovacao-heading" className={`${display.className} text-4xl sm:text-5xl mb-4 text-white`}>
             Resultados que falam por si
           </h2>
+          {/* ✅ Correção das aspas para o build da Vercel */}
           <p className="mx-auto max-w-2xl text-white/60 text-lg italic">
-            "Números não mentem. Nossa estratégia une o alcance exponencial do orgânico com a precisão cirúrgica do tráfego pago."
+            &ldquo;Números não mentem. Nossa estratégia une o alcance exponencial do orgânico com a precisão cirúrgica do tráfego pago.&rdquo;
           </p>
         </motion.div>
 
@@ -67,7 +67,6 @@ export default function ComprovacaoSection() {
                 className="w-full object-cover transition duration-500 group-hover:scale-105"
               />
               
-              {/* Overlay com o tipo de resultado */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
                 <span className="text-[10px] uppercase tracking-widest font-bold text-[#E9D8A6] bg-[#E9D8A6]/10 px-2 py-1 rounded-md border border-[#E9D8A6]/20">
                   {print.type}
@@ -79,14 +78,15 @@ export default function ComprovacaoSection() {
 
         {/* Frase de autoridade final */}
         <div className="mt-16 text-center space-y-8">
-            <div className="h-px w-24 bg-gradient-to-r from-transparent via-[#C8B273] to-transparent mx-auto" />
-            <p className={`${display.className} text-2xl text-white/90`}>
-                Pronto para ser o próximo caso de sucesso?
-            </p>
+          <div className="h-px w-24 bg-gradient-to-r from-transparent via-[#C8B273] to-transparent mx-auto" />
+          <p className={`${display.className} text-2xl text-white/90`}>
+            Pronto para ser o próximo caso de sucesso?
+          </p>
 
           <a
             href="https://wa.me/5514991042262?text=Olá,%20vi%20seus%20resultados%20e%20gostaria%20de%20conhecer%20os%20planos%20da%20VibeMed."
             target="_blank"
+            rel="noopener noreferrer"
             className="group relative inline-flex items-center"
           >
             <span className="absolute -inset-[2px] rounded-full bg-gradient-to-r from-[#E9D8A6] via-[#F1E4BD] to-[#C8B273] opacity-70 blur-md transition group-hover:opacity-100" />

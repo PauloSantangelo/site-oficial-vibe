@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { motion, AnimatePresence, easeInOut } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion"; // ✅ easeInOut removido
 import { DM_Serif_Display, Manrope } from "next/font/google";
 import Image from "next/image";
 import { Quote } from "lucide-react";
@@ -43,7 +43,7 @@ export default function ResultadosSection() {
       if (!isHovering.current) {
         setIndex((i) => (i + 1) % depoimentosReais.length);
       }
-    }, 12000); // 12 segundos para leitura confortável de textos longos
+    }, 12000);
     return () => clearInterval(id);
   }, []);
 
@@ -69,7 +69,7 @@ export default function ResultadosSection() {
           </p>
         </div>
 
-        {/* GRID DE MÉDICOS (RESPONSIVO E COM EFEITO TOUCH) */}
+        {/* GRID DE MÉDICOS */}
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4 md:gap-6 mb-16 md:mb-24">
           {medicosParceiros.map((medico, idx) => (
             <motion.div
@@ -94,13 +94,12 @@ export default function ResultadosSection() {
           ))}
         </div>
 
-        {/* ÁREA DE DEPOIMENTOS (CORREÇÃO DE TIPAGEM E LAYOUT) */}
+        {/* ÁREA DE DEPOIMENTOS */}
         <div 
           className="relative max-w-4xl mx-auto" 
           onMouseEnter={() => (isHovering.current = true)} 
           onMouseLeave={() => (isHovering.current = false)}
         >
-          {/* Ícone de Aspas com correção de tamanho responsivo */}
           <div className="absolute -top-6 left-1/2 -translate-x-1/2 bg-white px-4 z-10 text-[#C8B273]">
             <Quote 
               className="w-8 h-8 md:w-10 md:h-10" 
@@ -118,6 +117,7 @@ export default function ResultadosSection() {
               transition={{ duration: 0.5 }}
               className="bg-neutral-50 rounded-[2rem] md:rounded-[3rem] p-6 md:p-16 border border-neutral-100 text-center relative shadow-sm"
             >
+              {/* ✅ Correção das aspas para o build da Vercel */}
               <blockquote className="text-base md:text-xl leading-relaxed text-slate-700 font-medium italic mb-8 md:mb-10">
                 &ldquo;{depoimentosReais[index].texto}&rdquo;
               </blockquote>
@@ -134,7 +134,7 @@ export default function ResultadosSection() {
             </motion.div>
           </AnimatePresence>
 
-          {/* INDICADORES DE NAVEGAÇÃO */}
+          {/* INDICADORES */}
           <div className="mt-8 md:mt-12 flex justify-center gap-3">
             {depoimentosReais.map((_, i) => (
               <button
@@ -143,6 +143,7 @@ export default function ResultadosSection() {
                 className={`h-1.5 transition-all duration-500 rounded-full ${
                   i === index ? "w-10 md:w-16 bg-[#C8B273]" : "w-3 md:w-4 bg-neutral-200"
                 }`}
+                aria-label={`Ver depoimento de ${depoimentosReais[i].autor}`}
               />
             ))}
           </div>
